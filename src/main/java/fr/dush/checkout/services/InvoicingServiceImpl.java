@@ -4,7 +4,7 @@ import fr.dush.checkout.dao.OrderDAO;
 import fr.dush.checkout.domain.Order;
 import fr.dush.checkout.domain.OrderItem;
 import fr.dush.checkout.services.rules.Rule;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,8 +23,9 @@ import static java.util.stream.Collectors.*;
  * details.
  */
 @Service
-@Slf4j
 public class InvoicingServiceImpl implements InvoicingService {
+
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(InvoicingServiceImpl.class);
 
     @Autowired
     private RuleRepository ruleRepository;

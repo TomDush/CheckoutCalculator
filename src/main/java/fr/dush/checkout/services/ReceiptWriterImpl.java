@@ -2,7 +2,7 @@ package fr.dush.checkout.services;
 
 import fr.dush.checkout.domain.Order;
 import fr.dush.checkout.domain.OrderItem;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -18,8 +18,9 @@ import static fr.dush.checkout.tools.PriceTools.*;
  * Item are not grouped by type, they appear on as many line there are item bought. This is to display actual price.
  */
 @Service
-@Slf4j
 public class ReceiptWriterImpl implements ReceiptWriter {
+
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(ReceiptWriterImpl.class);
 
     @Override
     public void write(Order order, OutputStream out) throws IOException {

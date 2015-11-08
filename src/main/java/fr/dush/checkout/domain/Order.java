@@ -1,7 +1,5 @@
 package fr.dush.checkout.domain;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.util.Assert;
 
 import java.math.BigDecimal;
@@ -17,8 +15,6 @@ import static org.apache.commons.lang3.StringUtils.*;
 /**
  * Order, containing each selected items and discount if any.
  */
-@Getter
-@Setter
 public class Order {
 
     private Long orderId;
@@ -57,5 +53,29 @@ public class Order {
 
     public Stream<OrderItem> filterItems(Predicate<OrderItem> filter) {
         return items.stream().filter(filter);
+    }
+
+    public Long getOrderId() {
+        return this.orderId;
+    }
+
+    public BigDecimal getTotal() {
+        return this.total;
+    }
+
+    public Set<OrderItem> getItems() {
+        return this.items;
+    }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
+    }
+
+    public void setTotal(BigDecimal total) {
+        this.total = total;
+    }
+
+    public void setItems(Set<OrderItem> items) {
+        this.items = items;
     }
 }
