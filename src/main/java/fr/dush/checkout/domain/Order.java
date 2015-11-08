@@ -17,6 +17,7 @@ import static org.apache.commons.lang3.StringUtils.*;
  */
 public class Order {
 
+    /** Generated value */
     private Long orderId;
 
     /** This is the actual price of this order, including all discounts. */
@@ -50,6 +51,8 @@ public class Order {
             return newItem;
         });
     }
+
+    // ** GENERATED **
 
     public Stream<OrderItem> filterItems(Predicate<OrderItem> filter) {
         return items.stream().filter(filter);

@@ -4,10 +4,8 @@ package fr.dush.checkout.domain;
 import java.math.BigDecimal;
 
 /**
- * This define a type of item. It's intended to have them in database shared between all orders. Ie: we have only 1
- * instance per type of item, not 1 instance per item.
+ * This define a type of item. Instances (or database entry) are shared between orders.
  */
-// Should be used only by serializers and persistence framework
 public class Item {
 
     /**
@@ -28,6 +26,9 @@ public class Item {
         this.price = price;
     }
 
+    // ** GENERATED **
+
+    /** Should be used only by serializers and persistence framework */
     protected Item() {
     }
 

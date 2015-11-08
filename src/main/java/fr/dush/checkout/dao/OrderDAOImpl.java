@@ -6,9 +6,6 @@ import org.springframework.stereotype.Repository;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author Thomas Duchatelle
- */
 @Repository
 public class OrderDAOImpl implements OrderDAO {
 

@@ -3,7 +3,8 @@ package fr.dush.checkout.services;
 import fr.dush.checkout.domain.Order;
 
 /**
- * @author Thomas Duchatelle
+ * This service run order workflow because it's simple (else, another service should be created): save, run rules and
+ * compute totals.
  */
 public interface InvoicingService {
 

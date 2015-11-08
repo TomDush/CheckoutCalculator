@@ -40,7 +40,7 @@ public class CheckoutCalculatorTest {
 
     /**
      * The point of this test is <b>not</b> to test every case! Special case are tested on unit-test. Here the goal is
-     * to check spring components integration and a use case of this (partial) app.
+     * to test spring components integration and a use case of this (partial) app.
      */
     @Test
     public void testMyCheckoutCalculator() throws Exception {
@@ -89,7 +89,7 @@ public class CheckoutCalculatorTest {
         @Autowired
         private RuleRepository ruleRepository;
 
-        /** Initialise database */
+        /** Initialise database and load rule repository */
         @PostConstruct
         public void initializeDatabase() {
             // Items stored in database, management of this list are not include in this project.

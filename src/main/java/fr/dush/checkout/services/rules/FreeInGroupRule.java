@@ -42,29 +42,40 @@ public class FreeInGroupRule implements Rule {
         List<OrderItem> orderItems = order.filterItems(i -> itemCodes.contains(i.getItem().getCode())).collect(toList());
 
         // Count number of elements, then number of present bundles
-        Integer count = orderItems.stream()
-                                  .map(orderItem -> orderItem.getNumber() - orderItem.getFreeItems())
-                                  .reduce(0, (a, b) -> a + b);
-        int bundles = count / expectedNumber;
+        int bundles = countBundles(orderItems);
 
         // No need to go further if no bundle found
         if(bundles > 0) {
-            // Sort bundles to set 1 free per bundle (ASC price)
-            Collections.sort(orderItems, (i1, i2) -> i2.getItem().getPrice().compareTo(i1.getItem().getPrice()));
+            markFreeItems(orderItems, bundles);
 
-            // In this list, we really have 1 OrderItem per ordered item
-            List<OrderItem> items = new ArrayList<>();
-            orderItems.forEach(orderItem -> {
-                for (int i = 0; i < orderItem.getNumber() - orderItem.getFreeItems(); i++) {
-                    items.add(orderItem);
-                }
-            });
-
-            // Then it's easy to select items to set free
-            for (int i = 1; i <= bundles; i++) {
-                OrderItem orderItem = items.get(i * expectedNumber - 1);
-                orderItem.setFreeItems(orderItem.getFreeItems() + 1);
-            }
         }
+    }
+
+    /** Mark 1 free items per bundle - choose how to bundle wisely for customer best interest */
+    private void markFreeItems(List<OrderItem> orderItems, int bundles) {
+        // Sort bundles to set 1 free per bundle (ASC price)
+        Collections.sort(orderItems, (i1, i2) -> i2.getItem().getPrice().compareTo(i1.getItem().getPrice()));
+
+        // In this list, we really have 1 OrderItem per ordered item
+        List<OrderItem> items = new ArrayList<>();
+        orderItems.forEach(orderItem -> {
+            for (int i = 0; i < orderItem.getNumber() - orderItem.getFreeItems(); i++) {
+                items.add(orderItem);
+            }
+        });
+
+        // Then it's easy to select items to set free
+        for (int i = 1; i <= bundles; i++) {
+            OrderItem orderItem = items.get(i * expectedNumber - 1);
+            orderItem.setFreeItems(orderItem.getFreeItems() + 1);
+        }
+    }
+
+    /** Number of bundles present in this order */
+    private int countBundles(List<OrderItem> orderItems) {
+        Integer count = orderItems.stream()
+                                  .map(orderItem -> orderItem.getNumber() - orderItem.getFreeItems())
+                                  .reduce(0, (a, b) -> a + b);
+        return count / expectedNumber;
     }
 }

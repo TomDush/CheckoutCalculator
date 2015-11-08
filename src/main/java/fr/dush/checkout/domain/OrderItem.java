@@ -35,6 +35,9 @@ public class OrderItem {
         this.item = item;
     }
 
+    // ** GENERATED **
+
+    /** Should be used only by serializers and persistence framework */
     protected OrderItem() {
     }
 

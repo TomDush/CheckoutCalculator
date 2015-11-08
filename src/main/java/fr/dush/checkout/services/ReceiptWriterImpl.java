@@ -43,7 +43,7 @@ public class ReceiptWriterImpl implements ReceiptWriter {
     /**
      * Print a line with item name, final price and original price.
      * <p>
-     * This method is mopre complex than expected because I planned to display 1 line per type of item, and not by
+     * This method is more complex than expected because I planned to display 1 line per type of item, and not by
      * item.
      */
     private void printItem(PrintStream writer, OrderItem orderItem) {
